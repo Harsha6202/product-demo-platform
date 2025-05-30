@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/contexts/auth-context"
 import { useEffect, useState } from "react"
+import { use } from "react"
 import { supabase, type Demo, type DemoStep } from "@/lib/supabase"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -24,7 +25,8 @@ interface EditorPageProps {
   }
 }
 
-export default function EditorPage({ params }: EditorPageProps) {
+export default function EditorPage({ params: paramsPromise }: EditorPageProps) {
+  const params = use(paramsPromise)
   const { user, loading } = useAuth()
   const [demo, setDemo] = useState<Demo | null>(null)
   const [steps, setSteps] = useState<DemoStep[]>([])

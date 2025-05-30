@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, use } from "react"
 import { supabase, type Demo, type DemoStep } from "@/lib/supabase"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -14,7 +14,8 @@ interface DemoViewerProps {
   }
 }
 
-export default function DemoViewer({ params }: DemoViewerProps) {
+export default function DemoViewer({ params: paramsPromise }: DemoViewerProps) {
+  const params = use(paramsPromise)
   const [demo, setDemo] = useState<Demo | null>(null)
   const [steps, setSteps] = useState<DemoStep[]>([])
   const [currentStep, setCurrentStep] = useState(0)
